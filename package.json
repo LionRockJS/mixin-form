@@ -1,0 +1,26 @@
+{
+  "name": "@kohanajs/mod-form",
+  "version": "4.1.1",
+  "description": "Form Post handling for KohanaJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/kohana-js/proposals/level0/mod-form.git"
+  },
+  "keywords": [
+    "KohanaJS",
+    "post"
+  ],
+  "author": "Kojin Nakana",
+  "license": "LGPL-3.0-or-later",
+  "bugs": {
+    "url": "https://gitlab.com/kohana-js/proposals/level0/mod-form/issues"
+  },
+  "homepage": "https://gitlab.com/kohana-js/proposals/level0/mod-form#readme",
+  "dependencies": {
+    "busboy": "^1.6.0"
+  }
+}
