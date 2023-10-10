@@ -1,7 +1,13 @@
-require('kohanajs').addNodeModule(__dirname);
+import url from "node:url";
+const dirname = url.fileURLToPath(new URL('.', import.meta.url)).replace(/\/$/, '');
+export default {dirname}
 
-module.exports = {
-  MultipartParser : require('./classes/MultipartParser'),
-  ControllerMixinMultipartForm : require('./classes/controller-mixin/MultipartForm'),
-  HelperForm: require('./classes/helper/Form'),
-};
+import MultipartParser from './classes/MultipartParser.mjs';
+import ControllerMixinMultipartForm from './classes/controller-mixin/MultipartForm.mjs';
+import HelperForm from './classes/helper/Form.mjs';
+
+export{
+  MultipartParser,
+  ControllerMixinMultipartForm,
+  HelperForm,
+}

@@ -1,15 +1,14 @@
-const { ControllerMixin } = require('@kohanajs/core-mvc');
+import querystring from 'node:querystring';
+import { Controller, ControllerMixin } from '@lionrockjs/mvc';
+import MultipartParser from '../MultipartParser.mjs';
 
-const querystring = require('querystring');
-const MultipartParser = require('../MultipartParser');
-
-class MultipartForm extends ControllerMixin {
+export default class MultipartForm extends ControllerMixin {
   static POST_DATA = '$_POST';
   static GET_DATA = '$_GET';
   static REQUEST_DATA = '$_REQUEST';
 
   static async setup(state) {
-    const { request } = state.get(ControllerMixin.CLIENT);
+    const request = state.get(Controller.STATE_REQUEST);
     state.set(this.GET_DATA, request.query || {});
     state.set(this.REQUEST_DATA, { ...state.get(this.GET_DATA) });
 
@@ -46,5 +45,3 @@ class MultipartForm extends ControllerMixin {
     state.set(this.REQUEST_DATA, { ...state.get(this.POST_DATA), ...state.get(this.GET_DATA) });
   }
 }
-
-module.exports = MultipartForm;

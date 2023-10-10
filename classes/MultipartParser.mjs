@@ -1,15 +1,12 @@
-const {KohanaJS} = require("kohanajs");
-const { randomUUID } = require('crypto');
-const path = require('path');
-const busboy = require('busboy');
-const fs = require('fs');
-const {unlink} = fs.promises;
-function log(message){
-  if(KohanaJS.ENV === KohanaJS.ENV_PROD)return;
-  console.log(message);
-}
+import { randomUUID } from 'node:crypto';
+import path from 'node:path';
+import fs from 'node:fs';
+import { Central } from '@lionrockjs/central';
+import busboy from 'busboy';
 
-class MultipartParser{
+const {unlink} = fs.promises;
+
+export default class MultipartParser{
   static parse(incomingMessage, callback){
     if (!/^multipart\/form-data/.test(incomingMessage.headers['content-type'])){
       callback(null);
@@ -23,13 +20,13 @@ class MultipartParser{
       const { filename, encoding, mimeType } = info;
 
       const tmpName = randomUUID();
-      const filePath = path.normalize(`${KohanaJS.EXE_PATH}/../server/tmp/${tmpName}`);
+      const filePath = path.normalize(`${Central.EXE_PATH}/../server/tmp/${tmpName}`);
       file.pipe(fs.createWriteStream(filePath));
 
       file.on('data', data => {
-        log('File [' + name + '] got ' + data.length + ' bytes');
+        Central.log('File [' + name + '] got ' + data.length + ' bytes');
       }).on('close', () => {
-        log(`File [${name}] done`);
+        Central.log(`File [${name}] done`);
 
         if(!filename){
           unlink(filePath).then(()=>{/***/});
@@ -48,7 +45,7 @@ class MultipartParser{
 
     bb.on('field', (name, val, info) => {
       //const {nameTruncated, valueTruncated, encoding, mimeType} = info;
-      log([name, val, info]);
+      Central.log([name, val, info]);
 
       if (/\[]$/.test(name)) {
         //collect field[] as array'
@@ -67,5 +64,3 @@ class MultipartParser{
     incomingMessage.pipe(bb);
   }
 }
-
-module.exports = MultipartParser;

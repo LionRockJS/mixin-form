@@ -1,9 +1,9 @@
-const path = require('path');
-const {stat, mkdir, copyFile, unlink} = require('fs').promises;
-const { KohanaJS } = require('kohanajs');
+import path from 'node:path';
+import { stat, mkdir, copyFile, unlink } from 'node:fs/promises';
+import { Central } from '@lionrockjs/central';
 
-class HelperForm{
-  static async moveToUpload(fileField, uploadRelativeDirectory='/media', uploadRoot= `${KohanaJS.EXE_PATH}/../public`){
+export default class HelperForm{
+  static async moveToUpload(fileField, uploadRelativeDirectory='/media', uploadRoot= `${Central.EXE_PATH}/../public`){
     const today = new Date();
     const dateFolder = `${uploadRelativeDirectory}/${today.getFullYear()}/${today.getMonth()+1}/${today.getDate()}`;
     const uploadDateFolder = path.normalize(uploadRoot + dateFolder);
@@ -26,5 +26,3 @@ class HelperForm{
     return uploadPath;
   }
 }
-
-module.exports = HelperForm;

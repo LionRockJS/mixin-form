@@ -1,8 +1,9 @@
-const path = require('path');
-const { Controller } = require('@kohanajs/core-mvc');
-const ControllerMixinMultipartForm = require('../classes/controller-mixin/MultipartForm');
+import { Controller } from '@lionrockjs/mvc';
+import ControllerMixinMultipartForm from "../classes/controller-mixin/MultipartForm";
 
-class C extends Controller.mixin([ControllerMixinMultipartForm]) {
+class C extends Controller {
+  static mixins = [ControllerMixinMultipartForm];
+
   constructor(request) {
     super(request);
 

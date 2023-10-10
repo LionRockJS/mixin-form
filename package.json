@@ -1,25 +1,40 @@
 {
-  "name": "@kohanajs/mod-form",
-  "version": "4.1.1",
+  "type": "module",
+  "name": "@lionrockjs/mod--form",
+  "version": "1.0.0",
   "description": "Form Post handling for KohanaJS",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --experimental-vm-modules ../../../node_modules/jest/bin/jest.js --coverage"
+  },
+  "jest": {
+    "verbose": true,
+    "transform": {},
+    "testMatch": [
+      "**/__tests__/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)",
+      "**/?(*.)+(spec|test).mjs"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "mjs"
+    ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://gitlab.com/kohana-js/proposals/level0/mod-form.git"
+    "url": "git+https://github.com/LionRockJS/mod-form.git"
   },
   "keywords": [
     "KohanaJS",
     "post"
   ],
   "author": "Kojin Nakana",
-  "license": "LGPL-3.0-or-later",
+  "license": "MIT",
   "bugs": {
-    "url": "https://gitlab.com/kohana-js/proposals/level0/mod-form/issues"
+    "url": "https://github.com/LionRockJS/mod-form/issues"
   },
-  "homepage": "https://gitlab.com/kohana-js/proposals/level0/mod-form#readme",
+  "homepage": "https://github.com/LionRockJS/mod-form#readme",
   "dependencies": {
     "busboy": "^1.6.0"
   }

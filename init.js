@@ -1,5 +1,6 @@
-const { KohanaJS } = require('kohanajs');
+import { Central } from '@lionrockjs/central';
+import config from './config/form.mjs';
 
-KohanaJS.initConfig(new Map([
-  ['form', require('./config/form')],
+Central.initConfig(new Map([
+  ['form', config],
 ]));
