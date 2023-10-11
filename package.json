@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "name": "@lionrockjs/mod--form",
+  "name": "@lionrockjs/mod-form",
   "version": "1.0.0",
   "description": "Form Post handling for KohanaJS",
   "main": "index.js",
