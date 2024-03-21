@@ -1,5 +1,5 @@
-const { KohanaJS } = require('kohanajs');
+import { Central } from '@lionrockjs/central';
 
-module.exports = {
-  tempPath: `${KohanaJS.EXE_PATH}/../server/tmp`,
+export default {
+  tempPath: `${Central.EXE_PATH}/../server/tmp`,
 };
