@@ -1,8 +1,8 @@
 {
   "type": "module",
   "name": "@lionrockjs/mod-form",
-  "version": "1.0.0",
-  "description": "Form Post handling for KohanaJS",
+  "version": "0.0.2",
+  "description": "Form Post handling for LionRockJS",
   "main": "index.js",
   "scripts": {
     "test": "node --experimental-vm-modules ../../../node_modules/jest/bin/jest.js --coverage"
