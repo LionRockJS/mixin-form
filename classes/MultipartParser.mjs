@@ -45,7 +45,7 @@ export default class MultipartParser{
 
     bb.on('field', (name, val, info) => {
       //const {nameTruncated, valueTruncated, encoding, mimeType} = info;
-      Central.log([name, val, info]);
+      Central.log([name, val, info], false);
 
       if (/\[]$/.test(name)) {
         //collect field[] as array'
