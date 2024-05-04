@@ -24,9 +24,9 @@ export default class MultipartParser{
       file.pipe(fs.createWriteStream(filePath));
 
       file.on('data', data => {
-        Central.log('File [' + name + '] got ' + data.length + ' bytes');
+        Central.log('File [' + name + '] got ' + data.length + ' bytes', false);
       }).on('close', () => {
-        Central.log(`File [${name}] done`);
+        Central.log(`File [${name}] done`, false);
 
         if(!filename){
           unlink(filePath).then(()=>{/***/});
