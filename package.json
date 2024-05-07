@@ -1,7 +1,7 @@
 {
   "type": "module",
-  "name": "@lionrockjs/mod-form",
-  "version": "0.0.2",
+  "name": "@lionrockjs/mixin-form",
+  "version": "0.0.1",
   "description": "Form Post handling for LionRockJS",
   "main": "index.js",
   "scripts": {
