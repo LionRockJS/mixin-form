@@ -23,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LionRockJS/mod-form.git"
+    "url": "git+https://github.com/LionRockJS/mixin-form.git"
   },
   "keywords": [
     "KohanaJS",
@@ -32,9 +32,9 @@
   "author": "Kojin Nakana",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/LionRockJS/mod-form/issues"
+    "url": "https://github.com/LionRockJS/mixin-form/issues"
   },
-  "homepage": "https://github.com/LionRockJS/mod-form#readme",
+  "homepage": "https://github.com/LionRockJS/mixin-form#readme",
   "dependencies": {
     "busboy": "^1.6.0"
   }
