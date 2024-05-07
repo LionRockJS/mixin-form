@@ -1,3 +1,3 @@
 # KohanaJS Form Module
 
-KohanaJS HTML Form post handling
+LionRockJS HTML Form post handling
