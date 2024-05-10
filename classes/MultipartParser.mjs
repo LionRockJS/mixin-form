@@ -24,9 +24,9 @@ export default class MultipartParser{
       file.pipe(fs.createWriteStream(filePath));
 
       file.on('data', data => {
-        Central.log('File [' + name + '] got ' + data.length + ' bytes', false);
+        if(Central.config.form?.debug) Central.log('File [' + name + '] got ' + data.length + ' bytes', false);
       }).on('close', () => {
-        Central.log(`File [${name}] done`, false);
+        if(Central.config.form?.debug) Central.log(`File [${name}] done`, false);
 
         if(!filename){
           unlink(filePath).then(()=>{/***/});
@@ -45,7 +45,7 @@ export default class MultipartParser{
 
     bb.on('field', (name, val, info) => {
       //const {nameTruncated, valueTruncated, encoding, mimeType} = info;
-      Central.log([name, val, info], false);
+      if(Central.config.form?.debug) Central.log([name, val, info], false);
 
       if (/\[]$/.test(name)) {
         //collect field[] as array'
