@@ -34,7 +34,7 @@ export default class MultipartForm extends ControllerMixin {
     });
 
     Object.keys(postData).forEach(key =>{
-      const m = key.match(/^([^\[]+)\[(\w+)\]$/);
+      const m = key.match(/^([^\[]+)\[([\w-_:]+)]$/);
       if(!m)return;
       postData[m[1]] = postData[m[1]] || {};
       postData[m[1]][m[2]] = postData[key];

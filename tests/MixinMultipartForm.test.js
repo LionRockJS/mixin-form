@@ -63,6 +63,21 @@ describe('Controller Mixin Multipart Form test', () => {
     expect($_POST['ka'][2]).toBe('3');
   })
 
+  test('post array object data', async ()=>{
+    const c = new C({
+      raw: { url: '/articles/recent.aspx?foo=bar' },
+      query: {foo:'bar'},
+      body: 'hello=world&info[abc]=1&info[bc_d]=2&info[ef-g]=3&info[hi:j]=4' }
+    );
+    await c.execute();
+    const $_POST = c.state.get(ControllerMixinMultipartForm.POST_DATA);
+    expect($_POST['hello']).toBe('world');
+    expect($_POST.info['abc']).toBe('1');
+    expect($_POST.info['bc_d']).toBe('2');
+    expect($_POST.info['ef-g']).toBe('3');
+    expect($_POST.info['hi:j']).toBe('4');
+  })
+
   test('post object data', async ()=>{
     const c = new C({
       raw: { url: '/articles/recent.aspx?foo=bar' },
