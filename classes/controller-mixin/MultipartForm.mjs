@@ -21,6 +21,10 @@ export default class MultipartForm extends ControllerMixin {
       })
     }
 
+    if(request.raw?.headers && /application\/json/.test(request.raw.headers['content-type'])){
+      request.body = JSON.parse(request.body);
+    }
+
     if (!request.body) return;
 
     const postData = (typeof request.body === 'object')
