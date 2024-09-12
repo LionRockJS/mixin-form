@@ -20,7 +20,7 @@ export default class ControllerMixinCaptcha extends ControllerMixin {
 
   static async action_update(state) {
     if(state.get(this.CAPTCHA_ADAPTER).checkEnabled() === false)return;
-    const isValid = state.get(this.CAPTCHA_ADAPTER).validate(state);
+    const isValid = await state.get(this.CAPTCHA_ADAPTER).validate(state);
     if(!isValid){
       const client = state.get(Controller.STATE_CLIENT);
       await client.forbidden("Captcha validation failed.");
