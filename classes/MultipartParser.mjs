@@ -48,7 +48,7 @@ export default class MultipartParser{
       if(Central.config.form?.debug) Central.log([name, val, info], false);
 
       if (/\[]$/.test(name)) {
-        //collect field[] as array'
+        //collect field[] as array
         const k = name.replace('[]', '');
         body[k] = body[k] ?? [];
         body[k].push(val);

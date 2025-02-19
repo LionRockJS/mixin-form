@@ -29,7 +29,7 @@ export default class MultipartForm extends ControllerMixin {
 
     const postData = (typeof request.body === 'object')
       ? ({ ...request.body })
-      : querystring.parse(request.body);
+      : querystring.parse(request.body, '&', '=', { maxKeys: 65536 });
 
     //check post data key, change [] to array
     Object.keys(postData).forEach(key =>{
