@@ -36,7 +36,7 @@ export default class MultipartParser{
         body[name] = {
           tmp: filePath,
           tmpName: tmpName,
-          filename,
+          filename: Buffer.from(filename, 'latin1').toString('utf8'),
           encoding,
           mimetype: mimeType,
         };
