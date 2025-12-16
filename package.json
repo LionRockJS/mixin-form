@@ -1,25 +1,13 @@
 {
   "type": "module",
   "name": "@lionrockjs/mixin-form",
-  "version": "0.0.9",
+  "version": "2.0.0",
   "description": "Form Post handling for LionRockJS",
-  "main": "index.js",
+  "main": "classes/index.mjs",
+  "types": "types/index.d.ts",
   "scripts": {
-    "test": "node --experimental-vm-modules ../../../node_modules/jest/bin/jest.js --coverage"
-  },
-  "jest": {
-    "verbose": true,
-    "transform": {},
-    "testMatch": [
-      "**/__tests__/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).[jt]s?(x)",
-      "**/?(*.)+(spec|test).mjs"
-    ],
-    "moduleFileExtensions": [
-      "js",
-      "jsx",
-      "mjs"
-    ]
+    "build": "tsc",
+    "watch": "tsc -w"
   },
   "repository": {
     "type": "git",
@@ -37,5 +25,8 @@
   "homepage": "https://github.com/LionRockJS/mixin-form#readme",
   "dependencies": {
     "busboy": "^1.6.0"
+  },
+  "devDependencies": {
+    "@types/busboy": "^1.5.4"
   }
 }

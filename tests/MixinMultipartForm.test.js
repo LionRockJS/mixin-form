@@ -1,5 +1,5 @@
 import { Controller } from '@lionrockjs/mvc';
-import ControllerMixinMultipartForm from "../classes/controller-mixin/MultipartForm";
+import ControllerMixinMultipartForm from "../classes/controller-mixin/MultipartForm.mjs";
 
 class C extends Controller {
   static mixins = [ControllerMixinMultipartForm];
