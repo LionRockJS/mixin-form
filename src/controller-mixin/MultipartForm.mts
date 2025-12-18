@@ -8,7 +8,7 @@ export default class MultipartForm extends ControllerMixin {
   static REQUEST_DATA = '$_REQUEST';
 
   static async setup(state: Map<string, any>) {
-    const request = state.get((Controller as any).STATE_REQUEST);
+    const request = state.get(ControllerState.REQUEST);
     state.set(this.GET_DATA, request.query || {});
     state.set(this.REQUEST_DATA, { ...state.get(this.GET_DATA) });
 

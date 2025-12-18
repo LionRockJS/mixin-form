@@ -1,12 +1,12 @@
 import querystring from 'node:querystring';
-import { Controller, ControllerMixin } from '@lionrockjs/mvc';
+import { ControllerMixin, ControllerState } from '@lionrockjs/mvc';
 import MultipartParser from '../MultipartParser.mjs';
 export default class MultipartForm extends ControllerMixin {
     static POST_DATA = '$_POST';
     static GET_DATA = '$_GET';
     static REQUEST_DATA = '$_REQUEST';
     static async setup(state) {
-        const request = state.get(Controller.STATE_REQUEST);
+        const request = state.get(ControllerState.REQUEST);
         state.set(this.GET_DATA, request.query || {});
         state.set(this.REQUEST_DATA, { ...state.get(this.GET_DATA) });
         if (request.raw?.headers && /multipart\/form-data/.test(request.raw.headers['content-type'])) {
