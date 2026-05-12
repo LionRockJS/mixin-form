@@ -3,7 +3,7 @@
   "name": "@lionrockjs/mixin-form",
   "version": "2.0.0",
   "description": "Form Post handling for LionRockJS",
-  "main": "classes/index.js",
+  "main": "dist/index.js",
   "types": "types/index.d.ts",
   "scripts": {
     "build": "tsc",
