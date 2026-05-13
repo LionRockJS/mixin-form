@@ -16,6 +16,10 @@ export default class MultipartForm extends ControllerMixin {
             if (/multipart\/form-data/.test(contentType)) {
                 request.body = await MultipartParser.parseWebRequest(raw);
             }
+            else if (/application\/x-www-form-urlencoded/.test(contentType)) {
+                const formData = await raw.formData();
+                request.body = Object.fromEntries(formData.entries());
+            }
             else if (/application\/json/.test(contentType)) {
                 request.body = JSON.parse(request.body);
             }
