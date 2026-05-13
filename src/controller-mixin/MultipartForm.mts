@@ -1,5 +1,5 @@
 import querystring from 'node:querystring';
-import { Controller, ControllerMixin, ControllerState } from '@lionrockjs/mvc';
+import { ControllerMixin, ControllerState } from '@lionrockjs/mvc';
 import MultipartParser from '../MultipartParser.mjs';
 
 export default class MultipartForm extends ControllerMixin {
@@ -12,17 +12,30 @@ export default class MultipartForm extends ControllerMixin {
     state.set(this.GET_DATA, request.query || {});
     state.set(this.REQUEST_DATA, { ...state.get(this.GET_DATA) });
 
-    if(request.raw?.headers && /multipart\/form-data/.test(request.raw.headers['content-type'])){
-      await new Promise<void>(resolve => {
-        MultipartParser.parse(request.raw, body =>{
-          request.body = body;
-          resolve();
-        });
-      })
-    }
+    const isWebRequest = typeof (request.raw as any)?.formData === 'function';
 
-    if(request.raw?.headers && /application\/json/.test(request.raw.headers['content-type'])){
-      request.body = JSON.parse(request.body);
+    if (isWebRequest) {
+      const raw = request.raw as Request;
+      const contentType = raw.headers.get('content-type') || '';
+
+      if (/multipart\/form-data/.test(contentType)) {
+        request.body = await MultipartParser.parseWebRequest(raw);
+      } else if (/application\/json/.test(contentType)) {
+        request.body = JSON.parse(request.body);
+      }
+    } else {
+      if(request.raw?.headers && /multipart\/form-data/.test(request.raw.headers['content-type'])){
+        await new Promise<void>(resolve => {
+          MultipartParser.parse(request.raw, body =>{
+            request.body = body;
+            resolve();
+          });
+        })
+      }
+
+      if(request.raw?.headers && /application\/json/.test(request.raw.headers['content-type'])){
+        request.body = JSON.parse(request.body);
+      }
     }
 
     if (!request.body) return;

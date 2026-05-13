@@ -1,5 +1,4 @@
-import { Central } from '@lionrockjs/central';
 export default {
-    tempPath: `${Central.EXE_PATH}/../server/tmp`,
+    tempPath: `/server/tmp`,
     debug: false,
 };

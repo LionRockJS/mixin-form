@@ -1,8 +1,7 @@
 import path from 'node:path';
 import { stat, mkdir, copyFile, unlink } from 'node:fs/promises';
-import { Central } from '@lionrockjs/central';
 export default class HelperForm {
-    static async moveToUpload(fileField, uploadRelativeDirectory = '/media', uploadRoot = `${Central.EXE_PATH}/../public`) {
+    static async moveToUpload(fileField, uploadRelativeDirectory = '/media', uploadRoot = 'public') {
         const today = new Date();
         const dateFolder = `${uploadRelativeDirectory}/${today.getFullYear()}/${today.getMonth() + 1}/${today.getDate()}`;
         const uploadDateFolder = path.normalize(uploadRoot + dateFolder);

@@ -4,8 +4,12 @@ import ControllerMixinCaptcha from "./controller-mixin/Captcha.mjs";
 import HelperForm from './helper/Form.mjs';
 import FormCaptchaAdapter from './adapter/FormCaptchaAdapter.mjs';
 declare const _default: {
-    filename: string;
-    configs: string[];
+    configs: {
+        form: {
+            tempPath: string;
+            debug: boolean;
+        };
+    };
 };
 export default _default;
 export { MultipartParser, ControllerMixinMultipartForm, ControllerMixinCaptcha, FormCaptchaAdapter, HelperForm, };

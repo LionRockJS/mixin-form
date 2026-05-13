@@ -9,16 +9,29 @@ export default class MultipartForm extends ControllerMixin {
         const request = state.get(ControllerState.REQUEST);
         state.set(this.GET_DATA, request.query || {});
         state.set(this.REQUEST_DATA, { ...state.get(this.GET_DATA) });
-        if (request.raw?.headers && /multipart\/form-data/.test(request.raw.headers['content-type'])) {
-            await new Promise(resolve => {
-                MultipartParser.parse(request.raw, body => {
-                    request.body = body;
-                    resolve();
-                });
-            });
+        const isWebRequest = typeof request.raw?.formData === 'function';
+        if (isWebRequest) {
+            const raw = request.raw;
+            const contentType = raw.headers.get('content-type') || '';
+            if (/multipart\/form-data/.test(contentType)) {
+                request.body = await MultipartParser.parseWebRequest(raw);
+            }
+            else if (/application\/json/.test(contentType)) {
+                request.body = JSON.parse(request.body);
+            }
         }
-        if (request.raw?.headers && /application\/json/.test(request.raw.headers['content-type'])) {
-            request.body = JSON.parse(request.body);
+        else {
+            if (request.raw?.headers && /multipart\/form-data/.test(request.raw.headers['content-type'])) {
+                await new Promise(resolve => {
+                    MultipartParser.parse(request.raw, body => {
+                        request.body = body;
+                        resolve();
+                    });
+                });
+            }
+            if (request.raw?.headers && /application\/json/.test(request.raw.headers['content-type'])) {
+                request.body = JSON.parse(request.body);
+            }
         }
         if (!request.body)
             return;
