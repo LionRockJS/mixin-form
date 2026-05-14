@@ -1,11 +1,18 @@
 import querystring from 'node:querystring';
 import { ControllerMixin, ControllerState } from '@lionrockjs/mvc';
-import MultipartParser from '../MultipartParser.mjs';
+import MultipartParser from '../adapter/MultipartParser.mjs';
+
+export interface WebFileParser {
+  parseWebRequest(raw: Request, env?: any): Promise<Record<string, any> | null>;
+}
 
 export default class MultipartForm extends ControllerMixin {
   static POST_DATA = '$_POST';
   static GET_DATA = '$_GET';
   static REQUEST_DATA = '$_REQUEST';
+
+  /** Swap this to MultipartParserR2 (or any WebFileParser) for different upload backends */
+  static fileAdapter: WebFileParser = MultipartParser;
 
   static async setup(state: Map<string, any>) {
     const request = state.get(ControllerState.REQUEST);
@@ -19,7 +26,7 @@ export default class MultipartForm extends ControllerMixin {
       const contentType = raw.headers.get('content-type') || '';
 
       if (/multipart\/form-data/.test(contentType)) {
-        request.body = await MultipartParser.parseWebRequest(raw);
+        request.body = await this.fileAdapter.parseWebRequest(raw, request.env);
       } else if (/application\/x-www-form-urlencoded/.test(contentType)) {
         const formData = await raw.formData();
         request.body = Object.fromEntries(formData.entries());

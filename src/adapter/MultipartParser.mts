@@ -75,7 +75,7 @@ export default class MultipartParser{
     incomingMessage.pipe(bb);
   }
 
-  static async parseWebRequest(request: Request): Promise<Record<string, any> | null> {
+  static async parseWebRequest(request: Request, _env?: any): Promise<Record<string, any> | null> {
     const contentType = request.headers.get('content-type') || '';
     if (!/^multipart\/form-data/.test(contentType)) return null;
 

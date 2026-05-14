@@ -1,6 +1,6 @@
 import path from 'node:path';
 import { stat, mkdir, copyFile, unlink } from 'node:fs/promises';
-import { MultipartFile } from '../MultipartParser.mjs';
+import { MultipartFile } from '../adapter/MultipartParser.mjs';
 
 export default class HelperForm{
   static async moveToUpload(fileField: MultipartFile, uploadRelativeDirectory: string='/media', uploadRoot: string='public'){
